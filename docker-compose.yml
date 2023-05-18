@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  rpc-server:
+    build: rpc-server
+    ports:
+      - "8888:8888"
+    environment:
+      - SERVICE_NAME=rpc-server
+      - SERVICE_TAGS=rpc
+    depends_on:
+      - etcd
+  http-server:
+    build: http-server
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVICE_NAME=http-server
+      - SERVICE_TAGS=http
+    depends_on:
+      - etcd
+      - rpc-server
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.0
+    command: ["etcd", "--advertise-client-urls", "http://etcd:2379", "--listen-client-urls", "http://0.0.0.0:2379"]
+    ports:
+      - "2379:2379"

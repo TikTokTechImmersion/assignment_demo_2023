@@ -1,0 +1,39 @@
+// API for pull mode IM service.
+syntax = "proto3";
+
+package api;
+
+option go_package = "/api";
+
+message Message {
+  string chat = 1;     // format "<member1>:<member2>", e.g. "john:doe"
+  string text = 2;     // message text content
+  string sender = 3;   // sender identifier of the message
+  int64 send_time = 4; // unit: microseconds
+}
+
+message SendRequest {
+  string chat = 1;     // format "<member1>:<member2>", e.g. "john:doe"
+  string text = 2;     // message text content to be sent
+  string sender = 3;   // sender identifier
+}
+
+message SendResponse {} // return a reasonable HTTP status code if error occurs
+
+message PullRequest {
+  string chat = 1;  // format "<member1>:<member2>", e.g. "john:doe"
+  int64 cursor = 2; // starting position of message's send_time, inclusively, 0 by default
+  int32 limit = 3;  // the maximum number of messages returned per request, 10 by default
+  bool reverse = 4; // if false, the results will be sorted in ascending order by time
+}
+
+message PullResponse {
+  repeated Message messages = 1;
+  bool has_more = 2;     // if true, can use next_cursor to pull the next page of messages
+  int64 next_cursor = 3; // starting position of next page, inclusively
+}
+
+service MessageService {
+  rpc Send (SendRequest) returns (SendResponse); // POST
+  rpc Pull (PullRequest) returns (PullResponse); // GET
+}
