@@ -39,7 +39,9 @@ func TestIMServiceImpl_Send(t *testing.T) {
 			name: "Normal send request",
 			args: args{
 				ctx: context.Background(),
-				req: sendTest,
+				req: &rpc.SendRequest{
+					Message: sendTest,
+				},
 			},
 			wantErr: nil,
 		},
