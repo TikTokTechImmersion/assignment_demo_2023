@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	rpc "github.com/TikTokTechImmersion/assignment_demo_2023/rpc-server/kitex_gen/rpc/imservice"
@@ -9,7 +10,18 @@ import (
 	etcd "github.com/kitex-contrib/registry-etcd"
 )
 
+var (
+	mdb = &MongoClient{}
+)
+
 func main() {
+	ctx := context.Background()
+
+	err := mdb.InitClient(ctx, "mongodb://root:admin@mongodb:27017", "")
+	if err != nil {
+		log.Println(err.Error())
+	}
+
 	r, err := etcd.NewEtcdRegistry([]string{"etcd:2379"}) // r should not be reused.
 	if err != nil {
 		log.Fatal(err)
