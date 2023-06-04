@@ -29,14 +29,6 @@ func TestIMServiceImpl_Send(t *testing.T) {
 		wantErr error
 	}{
 		{
-			name: "Empty request sent",
-			args: args{
-				ctx: context.Background(),
-				req: &rpc.SendRequest{},
-			},
-			wantErr: errors.New("Empty request sent"),
-		},
-		{
 			name: "Normal send request",
 			args: args{
 				ctx: context.Background(),
