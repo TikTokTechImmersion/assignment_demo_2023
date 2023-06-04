@@ -14,16 +14,32 @@ func TestIMServiceImpl_Send(t *testing.T) {
 		ctx context.Context
 		req *rpc.SendRequest
 	}
+
+	sendTest := &rpc.Message{
+		Chat: "test1:test2"
+		Text: "testing text"
+		Sender: "test1"
+		SendTime: strconv.FormatInt(time.Now().Unix(), 10)
+	}
+
 	tests := []struct {
 		name    string
 		args    args
 		wantErr error
 	}{
 		{
-			name: "success",
+			name: "Empty request sent",
 			args: args{
 				ctx: context.Background(),
 				req: &rpc.SendRequest{},
+			},
+			wantErr: errors.New("Empty request sent"),
+		},
+		{
+			name: "Normal send request",
+			args: args{
+				ctx: context.Background(),
+				req: sendTest,
 			},
 			wantErr: nil,
 		},
