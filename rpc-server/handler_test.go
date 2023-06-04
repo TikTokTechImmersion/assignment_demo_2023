@@ -21,7 +21,7 @@ func TestIMServiceImpl_Send(t *testing.T) {
 		Chat:     "test1:test2",
 		Text:     "testing text",
 		Sender:   "test1",
-		SendTime: strconv.FormatInt(time.Now().Unix(), 10),
+		SendTime: int64(time.Now().Unix(), 10),
 	}
 
 	tests := []struct {
