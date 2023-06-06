@@ -2,20 +2,26 @@ version: '3.9'
 services:
   rpc-server:
     build: rpc-server
+    image: rpc/imservice:v8
     ports:
       - "8888:8888"
     environment:
       - SERVICE_NAME=rpc-server
       - SERVICE_TAGS=rpc
+      - USER_NAME=root
+      - USER_PWD=admin
+      - DB_URL=mongodb
     depends_on:
       - etcd
   http-server:
     build: http-server
+    image: http/imservice:v7
     ports:
       - "8080:8080"
     environment:
       - SERVICE_NAME=http-server
       - SERVICE_TAGS=http
+      - RPC_URL=rpc-server
     depends_on:
       - etcd
       - rpc-server

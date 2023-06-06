@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TikTokTechImmersion/assignment_demo_2023/rpc-server/kitex_gen/rpc"
+	"github.com/aaronsng/assignment_demo_2023/rpc-server/kitex_gen/rpc"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

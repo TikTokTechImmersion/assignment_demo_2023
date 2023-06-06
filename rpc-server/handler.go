@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/TikTokTechImmersion/assignment_demo_2023/rpc-server/kitex_gen/rpc"
+	"github.com/aaronsng/assignment_demo_2023/rpc-server/kitex_gen/rpc"
 )
 
 // IMServiceImpl implements the last service interface defined in the IDL.

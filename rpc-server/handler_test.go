@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/TikTokTechImmersion/assignment_demo_2023/rpc-server/kitex_gen/rpc"
+	"github.com/aaronsng/assignment_demo_2023/rpc-server/kitex_gen/rpc"
 	"github.com/stretchr/testify/assert"
 )
 
