@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/TikTokTechImmersion/assignment_demo_2023/http-server/kitex_gen/rpc"
@@ -48,6 +49,19 @@ func sendMessage(ctx context.Context, c *app.RequestContext) {
 		c.String(consts.StatusBadRequest, "Failed to parse request body: %v", err)
 		return
 	}
+
+	sender := c.Query("sender")
+	receiver := c.Query("receiver")
+
+	if strings.Compare(sender, receiver) < 0 {
+		req.Chat = sender + ":" + receiver
+	} else {
+		req.Chat = receiver + ":" + sender
+	}
+
+	req.Text = c.Query("text")
+	req.Sender = sender
+
 	resp, err := cli.Send(ctx, &rpc.SendRequest{
 		Message: &rpc.Message{
 			Chat:   req.Chat,
