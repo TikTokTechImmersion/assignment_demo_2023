@@ -9,6 +9,7 @@ services:
       - SERVICE_TAGS=rpc
     depends_on:
       - etcd
+      - postgres
   http-server:
     build: http-server
     ports:
@@ -29,11 +30,17 @@ services:
   postgres:
     image: postgres:15.3
     restart: always
+    expose:
+      - 5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=blank
+      - POSTGRES_DB=assignment_demo_2023
+      - POSTGRES_HOST=localhost
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes: 
       - ./postgres-data:/var/lib/postgresql/data
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    depends_on:
+      - etcd

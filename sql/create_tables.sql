@@ -1,4 +1,10 @@
-DROP TABLE IF NOT EXISTS messages;
+DROP DATABASE IF EXISTS assignment_demo_2023;
+CREATE DATABASE assignment_demo_2023;
+
+-- Use database assignment_demo_2023
+\c assignment_demo_2023;
+
+DROP TABLE IF EXISTS messages;
 
 CREATE TABLE messages (
 	message_id SERIAL PRIMARY KEY,
