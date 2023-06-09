@@ -12,7 +12,6 @@ type IMServiceImpl struct{}
 
 func (s *IMServiceImpl) Send(ctx context.Context, req *rpc.SendRequest) (*rpc.SendResponse, error) {
 	resp := rpc.NewSendResponse()
-
 	resp.Code, resp.Msg = areYouLucky()
 	return resp, nil
 }
