@@ -55,6 +55,11 @@ func sendMessage(ctx context.Context, c *app.RequestContext) {
 	sender := c.Query("sender")
 	receiver := c.Query("receiver")
 
+	if sender == "" || receiver == "" {
+		c.String(consts.StatusBadRequest, "Sender name and receiver name cannot be empty")
+		return
+	}
+
 	if strings.Count(sender, ":") >= 1 || strings.Count(receiver, ":") >= 1 {
 		c.String(consts.StatusBadRequest, "Sender name and receiver name cannot contain the character :")
 		return
