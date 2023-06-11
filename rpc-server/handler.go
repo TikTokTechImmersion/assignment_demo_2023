@@ -76,10 +76,17 @@ func (s *IMServiceImpl) Pull(ctx context.Context, req *rpc.PullRequest) (*rpc.Pu
 
 	db := connectDB()
 
+	var order string
+	if *req.Reverse {
+		order = "ASC"
+	} else {
+		order = "DESC"
+	}
+
 	// To select from index n (1-based onwards) would mean an offset of n-1.
 	// Reference: https://stackoverflow.com/questions/16568/how-to-select-the-nth-row-in-a-sql-database-table
-	rows, err := db.Query(`SELECT message_id, sender, message, message_send_time FROM messages WHERE chat=$1 
-		ORDER BY message_send_time ASC LIMIT $2 OFFSET $3`,
+	rows, err := db.Query(fmt.Sprintf(`SELECT message_id, sender, message, message_send_time FROM messages WHERE chat=$1 
+		ORDER BY message_send_time %s LIMIT $2 OFFSET $3`, order),
 		correctedChatParam, req.Limit+1, req.Cursor)
 	if err != nil {
 		panic(err)
@@ -119,13 +126,6 @@ func (s *IMServiceImpl) Pull(ctx context.Context, req *rpc.PullRequest) (*rpc.Pu
 		// resp.Messages has one more row than required in this case
 		resp.Messages = resp.Messages[:len(resp.Messages)-1]
 		resp.NextCursor = &[]int64{(req.Cursor + int64(req.Limit))}[0]
-	}
-
-	if *req.Reverse {
-		length := len(resp.Messages)
-		for i := 0; i*2 < length; i++ {
-			resp.Messages[i], resp.Messages[length-i-1] = resp.Messages[length-i-1], resp.Messages[i]
-		}
 	}
 
 	// Errors can still happen while iterating through the rows
