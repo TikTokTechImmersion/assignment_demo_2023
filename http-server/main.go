@@ -156,8 +156,6 @@ func pullMessage(ctx context.Context, c *app.RequestContext) {
 	if err != nil {
 		c.String(consts.StatusInternalServerError, err.Error())
 		return
-	} else if resp.Code == 1 {
-		c.String(consts.StatusBadRequest, "Failed to parse request body: %v", err)
 	} else if resp.Code != 0 {
 		c.String(consts.StatusInternalServerError, resp.Msg)
 		return
