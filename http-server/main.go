@@ -21,6 +21,9 @@ import (
 var cli imservice.Client
 
 func main() {
+	// The URL locating the RPC server is located through here.
+	// When the HTTP server is first launched, Kubernetes / Docker would
+	// load an environment variable specifying the URL of the RPC service
 	rpcUrl := os.Getenv("RPC_URL")
 	fmt.Println("RPC_URL + " + rpcUrl)
 
@@ -37,7 +40,7 @@ func main() {
 	h := server.Default(server.WithHostPorts("0.0.0.0:8080"))
 
 	h.GET("/ping", func(c context.Context, ctx *app.RequestContext) {
-		ctx.JSON(consts.StatusOK, utils.H{"message": "pong"})
+		ctx.JSON(consts.StatusOK, utils.H{"message": "po`n`g"})
 	})
 
 	h.POST("/api/send", sendMessage)

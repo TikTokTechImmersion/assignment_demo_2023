@@ -20,6 +20,10 @@ type MongoClient struct {
 }
 
 type MongoChat struct {
+	/*
+	* Custom Go struct for interfacing with the Mongo server
+	* ID will be automatically filled by the Mongo driver
+	 */
 	ID       primitive.ObjectID `bson:"_id,omitempty"`
 	ChatRoom string             `bson:"chatroom,omitempty"`
 	Message  string             `bson:"message,omitempty"`
@@ -28,6 +32,7 @@ type MongoChat struct {
 }
 
 func (c *MongoClient) InitClient(ctx context.Context, address string, password string) error {
+	// Initialise a method associated with the Mongo Client struct
 	clientOpts := options.Client().ApplyURI(address)
 	client, err := mongo.Connect(ctx, clientOpts)
 
@@ -35,12 +40,18 @@ func (c *MongoClient) InitClient(ctx context.Context, address string, password s
 		log.Fatal(err)
 	}
 
+	// Assign the connected mongo client to a global variable
 	c.cli = client
 	return nil
 }
 
 func (c *MongoClient) ObtainChat(chat string) string {
 	// Ensure that the chat ID is a consistent form
+	// The lexicographically smaller party will be the first followed by the other party
+	// The chat would also be formatted as such "party1:party2"
+	// i.e.
+	// if party1 is lexicographically smaller than party2. Then the chat room name would not change
+	// if party2 is lexicographically smaller than party1. Then the chat room name would change to party2:party1
 	chat = strings.ToLower(chat)
 	parties := strings.Split(chat, ":")
 	var finalChatID string
@@ -99,6 +110,14 @@ func (c *MongoClient) GetRoomByID(ctx context.Context, req *rpc.PullRequest) *rp
 		order = 1
 	}
 
+	// I'll be querying the mongo database to get the messages according to the order
+	// specified in the GET request, such as whether
+	// 1. It is in reversed order
+	// 2. Starting item in the retrieved list
+	// 3. Sort it according to the list of items retrieved
+	// *NOTE: I'll be pulling one more message than required.
+	// If I manage to pull more than one more message, than the variable of HasMore will be set in the response
+	// else no more HasMore
 	filter := bson.M{"chatroom": chatId}
 	pipeline := []bson.M{
 		{"$match": filter},

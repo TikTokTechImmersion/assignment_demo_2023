@@ -12,12 +12,15 @@ import (
 )
 
 var (
+	// Global variable here
 	mdb = &MongoClient{}
 )
 
 func main() {
+	// The URL locating the Mongo server is located through here.
+	// When the HTTP server is first launched, Kubernetes / Docker would
+	// load an environment variable specifying the URL of the RPC service
 	ctx := context.Background()
-
 	db_username := os.Getenv("USER_NAME")
 	db_password := os.Getenv("USER_PWD")
 	db_url := os.Getenv("DB_URL")
