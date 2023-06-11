@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6042d2d-e83b-49e8-b45e-d0bca2d4ef71" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/rpc-server/redis.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http-server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/http-server/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http-server/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/http-server/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-server/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-server/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-server/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-server/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-server/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
