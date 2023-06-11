@@ -7,7 +7,7 @@ require (
 	github.com/cloudwego/hertz v0.6.1
 	github.com/cloudwego/kitex v0.5.2
 	github.com/kitex-contrib/registry-etcd v0.1.0
-	google.golang.org/protobuf v1.28.1
+	google.golang.org/protobuf v1.30.0
 )
 
 require (
