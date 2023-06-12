@@ -1,6 +1,6 @@
 module github.com/TikTokTechImmersion/assignment_demo_2023/http-server
 
-go 1.18
+go 1.20
 
 require (
 	github.com/apache/thrift v0.13.0
