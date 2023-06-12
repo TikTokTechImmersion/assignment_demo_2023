@@ -9,6 +9,7 @@ services:
       - SERVICE_TAGS=rpc
     depends_on:
       - etcd
+      - redis # Wait for Redis server to be ready before running rpc-server
   http-server:
     build: http-server
     ports:
@@ -24,3 +25,9 @@ services:
     command: ["etcd", "--advertise-client-urls", "http://etcd:2379", "--listen-client-urls", "http://0.0.0.0:2379"]
     ports:
       - "2379:2379"
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"

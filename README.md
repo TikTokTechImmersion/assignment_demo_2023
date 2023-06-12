@@ -4,6 +4,9 @@
 
 This is a demo and template for backend assignment of 2023 TikTok Tech Immersion.
 
+From Sihan:
+    Sorry for this incomplete assignment. Because I have zero basic knowledge in these topics, the learning curve for this assignment is way too steep for me and I tried to do as much as possible.
+
 ## Installation
 
 Requirement:
