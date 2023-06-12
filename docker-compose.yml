@@ -10,6 +10,10 @@ services:
     depends_on:
       - etcd
       - postgres
+    # Limit log size, taken from https://stackoverflow.com/questions/46672001/is-it-safe-to-clean-docker-overlay2
+    logging:
+      options:
+        max-size: 10m
   http-server:
     build: http-server
     ports:
@@ -20,11 +24,19 @@ services:
     depends_on:
       - etcd
       - rpc-server
+    # Limit log size, taken from https://stackoverflow.com/questions/46672001/is-it-safe-to-clean-docker-overlay2
+    logging:
+      options:
+        max-size: 10m
   etcd:
     image: quay.io/coreos/etcd:v3.5.0
     command: ["etcd", "--advertise-client-urls", "http://etcd:2379", "--listen-client-urls", "http://0.0.0.0:2379"]
     ports:
       - "2379:2379"
+    # Limit log size, taken from https://stackoverflow.com/questions/46672001/is-it-safe-to-clean-docker-overlay2
+    logging:
+      options:
+        max-size: 10m
   # PostgreSQL database set-up
   # Code is based on https://levelup.gitconnected.com/creating-and-filling-a-postgres-db-with-docker-compose-e1607f6f882f
   postgres:
@@ -44,3 +56,7 @@ services:
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
     depends_on:
       - etcd
+    # Limit log size, taken from https://stackoverflow.com/questions/46672001/is-it-safe-to-clean-docker-overlay2
+    logging:
+      options:
+        max-size: 10m

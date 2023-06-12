@@ -29,12 +29,18 @@ docker-compose down
 <h2>How to use the backend API</h2>
 
 To send a message from [sender] to [receiver], the command format (in the terminal) is as follows:
-```curl -X POST 'localhost:8080/api/send?sender=[sender]&receiver=[receiver]&text=[message]'```
+
+```
+curl -X POST 'localhost:8080/api/send?sender=[sender]&receiver=[receiver]&text=[message]'
+```
 
 Replace [sender] with the sender, [receiver] with the receiver, and [message] with the actual text of the message. The parameters can appear in any order.
 
 To retrieve what is in the chat, one can use the following command:
-```localhost:8080/api/pull?chat=[chat]&cursor=[cursor]&limit=[limit]&reverse=[reverse]```
+
+```
+localhost:8080/api/pull?chat=[chat]&cursor=[cursor]&limit=[limit]&reverse=[reverse]
+```
 
 Replace [chat], [cursor], [limit] and [reverse] with the appropriate values accordingly. Note that [cursor], [limit] and [reverse] are optional, with default values of 0 (i.e. starting from first message), 10 (i.e. at most 10 messages returned) and false (i.e. starting from the newest message) respectively. The parameters can appear in any order.
 
@@ -47,3 +53,7 @@ This request returns a list of up to [limit] messages from the conversation betw
 - [limit] represents the maximum number of results to be returned. 
 
 - [reverse] is either true or false. If true, the messages are sorted from oldest to newest. If false (default), the messages are returned from newest to oldest.
+
+<h2>How to run tests</h2>
+
+Change directory to ```rpc-server```, then run ```go test```.
