@@ -9,7 +9,8 @@ This is my backend assignment submission of TikTok Tech Immersion Programme 2023
 1. Download the source code.
 2. Install Docker, PostgreSQL and Go 1.20 or later 
 3. Change the user and password regarding PostgreSQL database connection in docker-compose.yml and rpc-server/handler.go 
-4. Build the project using ```docker-compose build``` and run using ```docker-compose up -d```
+4. Create databases assignment_demo_2023 and assignment_demo_2023_test in the local PostgreSQL instance.
+5. Build the project using ```docker-compose build``` and run using ```docker-compose up -d```
 
 To build the project, on the root directory of the project, execute the following command on the terminal:
 ```
@@ -56,4 +57,5 @@ This request returns a list of up to [limit] messages from the conversation betw
 
 <h2>How to run tests</h2>
 
-Change directory to ```rpc-server```, then run ```go test```.
+1. To run RPC Server tests, change directory to ```rpc-server```, then run ```go test```.
+2. To run performance tests, install k6 software, then change directory to ```performance-tests```, then run ```k6 run load-test.js```.
