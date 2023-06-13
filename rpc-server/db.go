@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 type dbConnectionParam struct {
@@ -51,9 +52,17 @@ func connectDB(connectionParam *dbConnectionParam) *sql.DB {
 		panic(dbConnectErr)
 	}
 
-	dbConnectErr = db.Ping()
-	if dbConnectErr != nil {
-		panic(dbConnectErr)
+	numTries := 5
+	for i := 0; i < numTries; i++ {
+		time.Sleep(time.Second * (1 << i))
+		dbConnectErr = db.Ping()
+		if dbConnectErr != nil {
+			if i == numTries-1 {
+				panic(dbConnectErr)
+			}
+		} else {
+			break
+		}
 	}
 
 	return db

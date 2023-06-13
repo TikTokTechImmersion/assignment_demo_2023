@@ -102,7 +102,7 @@ func (s *IMServiceImpl) PullSpecifyingDatabase(ctx context.Context, req *rpc.Pul
 		message_send_time_unix_nano := message_send_time_golang.UnixNano()
 
 		newMessage := &rpc.Message{
-			Chat:     correctedChatParam,
+			Chat:     req.Chat,
 			Text:     message,
 			Sender:   sender,
 			SendTime: message_send_time_unix_nano,
