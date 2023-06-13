@@ -5,7 +5,7 @@
 # Note: Due to connection issue with localhost while testing, it appears that a container is required
 # Reference: https://stackoverflow.com/questions/74332455/connection-refused-for-local-server-in-github-actions-workflow
 
-# Note: Due to x509 certificate signed by unknown authority error for rpc-server, I added GOINSECURE
+# Note: Due to x509 certificate signed by unknown authority error for rpc-server, I added GOINSECURE and other flags in build
 # Reference: https://stackoverflow.com/questions/71623508/goinsecure-to-enable-http-downlaods-on-packages-from-github
 
 name: Tests
@@ -54,7 +54,7 @@ jobs:
           go-version: 1.19
 
       - name: Build
-        run: GOINSECURE="proxy.golang.org/*,github.com,github.com/*" go build -v ./...
+        run: GOINSECURE="proxy.golang.org/*,github.com,github.com/*" GONOSUMDB="proxy.golang.org/*,github.com,github.com/*" GOPRIVATE="proxy.golang.org/*,github.com,github.com/*" go build -v ./...
 
       - name: Test
         run: go test -race -cover -coverprofile=coverage.out $(go list ./... | grep -Ev "_gen") -coverpkg $(go list ./... | grep -Ev "_gen" | tr "\n" "," | sed 's/.$//')
