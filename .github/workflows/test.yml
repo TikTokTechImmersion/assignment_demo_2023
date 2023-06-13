@@ -39,6 +39,11 @@ jobs:
   rpc-server:
     runs-on: ubuntu-latest
     container: ubuntu
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
     defaults:
       run:
         working-directory: ./rpc-server
