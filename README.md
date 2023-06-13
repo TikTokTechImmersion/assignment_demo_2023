@@ -4,6 +4,31 @@
 
 This is the completed demo for backend assignment of 2023 TikTok Tech Immersion done by Aaron Sng (Find me on Linkedin: http://linkedin.com/in/aaronsng ;))
 
+## Installation
+
+Requirement:
+
+- golang 1.18+
+- docker
+
+To install dependency tools:
+
+```bash
+make pre
+```
+
+## Run
+
+```bash
+docker-compose up -d
+```
+
+Check if it's running:
+
+```bash
+curl localhost:8080/ping
+```
+
 ![whiteboard_exported_image](https://github.com/TikTokTechImmersion/assignment_demo_2023/assets/26215621/a25c262e-e2a5-4163-abe1-ca0abf50c029)
 
 ## 1. Send API
