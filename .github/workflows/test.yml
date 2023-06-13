@@ -3,6 +3,8 @@
 
 name: Tests
 
+# Workaround  for $GOPATH not found can be found here: 
+# https://github.com/actions/setup-go/issues/102#issuecomment-769248755
 on:
   push:
     branches: [ "main" ]
@@ -10,9 +12,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   http-server:
     runs-on: ubuntu-latest
+    env:
+      GOPATH: ${{ github.workspace }}
     defaults:
       run:
         working-directory: ./http-server
@@ -35,6 +38,8 @@ jobs:
 
   rpc-server:
     runs-on: ubuntu-latest
+    env:
+      GOPATH: ${{ github.workspace }}
     defaults:
       run:
         working-directory: ./rpc-server
