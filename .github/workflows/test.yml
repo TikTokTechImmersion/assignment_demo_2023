@@ -1,5 +1,6 @@
 # This workflow will build a golang project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+# Note: putting version of go as 1.19 here because GitHub Actions does not support go 1.20 yet
 
 name: Tests
 
