@@ -7,7 +7,7 @@ This is my backend assignment submission of TikTok Tech Immersion Programme 2023
 <h2>How to setup the project</h2>
 
 1. Download the source code.
-2. Install Docker, PostgreSQL and Go 1.18 or later 
+2. Install Docker, PostgreSQL and Go 1.20 or later 
 3. Change the user and password regarding PostgreSQL database connection in docker-compose.yml and rpc-server/handler.go 
 4. Build the project using ```docker-compose build``` and run using ```docker-compose up -d```
 
