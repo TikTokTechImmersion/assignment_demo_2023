@@ -41,6 +41,11 @@ jobs:
 
   rpc-server:
     runs-on: ubuntu-latest
+    container: ubuntu
+    env:
+      GOINSECURE: "proxy.golang.org/*,github.com,github.com/*"
+      GONOSUMDB: "proxy.golang.org/*,github.com,github.com/*"
+      GOPRIVATE: "proxy.golang.org/*,github.com,github.com/*" 
     defaults:
       run:
         working-directory: ./rpc-server
