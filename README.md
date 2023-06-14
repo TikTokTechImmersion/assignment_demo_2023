@@ -8,4 +8,4 @@ Using MySQL for this assignment.
 Have to install MySQL Driver
 > go get -u github.com/go-sql-driver/mysql
 
-Tried but cmi :sob::sob::sob:
+Tried but cmi.
