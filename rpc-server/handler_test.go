@@ -17,7 +17,7 @@ import (
 )
 
 var testDBParam = dbConnectionParam{
-	host:     "127.0.0.1",
+	host:     "localhost",
 	port:     5432,
 	user:     "postgres",
 	dbname:   "assignment_demo_2023_test",
