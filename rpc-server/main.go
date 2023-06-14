@@ -18,7 +18,8 @@ var (
 func main() {
 	ctx := context.Background()
 
-	err := rdb.InitClient(ctx, "mysql:3306", "")
+	// Initialize MySQLClient
+	err := mysqldb.InitClient(ctx, "hello:hello123@tcp(mysql:3306)/database")
     if err != nil {
        errMsg := fmt.Sprintf("failed to init MySQL client, err: %v", err)
        log.Fatal(errMsg)

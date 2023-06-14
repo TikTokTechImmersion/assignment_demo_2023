@@ -5,5 +5,7 @@
 This is for backend assignment of 2023 TikTok Tech Immersion.
 
 Using MySQL for this assignment.
-Install MySQL Driver before proceed
+Have to install MySQL Driver
 > go get -u github.com/go-sql-driver/mysql
+
+Tried but cmi :sob::sob::sob:
