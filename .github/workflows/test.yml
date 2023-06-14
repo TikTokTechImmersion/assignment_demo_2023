@@ -38,6 +38,23 @@ jobs:
     defaults:
       run:
         working-directory: ./rpc-server
+    # Install PostgreSQL for rpc-server to run
+    # https://github.com/actions/example-services/issues/22#issuecomment-633220291
+    services:
+      postgres:
+        image: postgres:latest 
+        env:
+          POSTGRES_PASSWORD: blank
+          POSTGRES_USER: postgres
+          POSTGRES_DB: assignment_2023_demo_test
+        # Wait for PostgreSQL to start
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v3
 
