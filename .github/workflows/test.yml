@@ -5,6 +5,9 @@
 # Note: Due to connection issue with localhost while testing, it appears that a container is required
 # Reference: https://stackoverflow.com/questions/74332455/connection-refused-for-local-server-in-github-actions-workflow
 
+# Note: Due to x509 certificate signed by unknown authority error for rpc-server, I added GOINSECURE and other flags
+# Reference: https://stackoverflow.com/questions/71623508/goinsecure-to-enable-http-downlaods-on-packages-from-github
+
 name: Tests
 
 on:
@@ -38,19 +41,11 @@ jobs:
 
   rpc-server:
     runs-on: ubuntu-latest
-    container: ubuntu
     defaults:
       run:
         working-directory: ./rpc-server
     steps:
-      - name: Setup git
-        run: |
-          apt-get update; apt-get install -y git
-      
-      - name: Git checkout
-        uses: actions/checkout@v3
-        with:
-          path: api
+      - uses: actions/checkout@v3
 
       - name: Set up Go
         uses: actions/setup-go@v3
