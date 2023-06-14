@@ -2,9 +2,6 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 # Note: putting version of go as 1.19 here because GitHub Actions does not support go 1.20 yet
 
-# Note: Due to connection issue with localhost while testing, it appears that a container is required
-# Reference: https://stackoverflow.com/questions/74332455/connection-refused-for-local-server-in-github-actions-workflow
-
 name: Tests
 
 on:
@@ -38,7 +35,6 @@ jobs:
 
   rpc-server:
     runs-on: ubuntu-latest
-    container: ubuntu
     defaults:
       run:
         working-directory: ./rpc-server
